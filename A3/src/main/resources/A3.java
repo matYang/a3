@@ -427,7 +427,7 @@ public class A3{
                                 int row = rs.getInt("ROW_NUM");
                                 rs.updateInt("COL_NUM",row);
                                 rs.updateInt("ROW_NUM",col);
-                                rs.executeUpdate();
+                                //rs.executeUpdate();
                                 
                                 query = "SELECT * FROM MATRIX_DATA WHERE MARIX_ID = " + matrix2;
                                 rs = stmt.executeQuery(query);
@@ -436,7 +436,7 @@ public class A3{
                                     row = rs.getInt("ROW_NUM");
                                     rs.updateInt("COL_NUM",row);
                                     rs.updateInt("ROW_NUM",col);
-                                    rs.executeUpdate();
+                                    //rs.executeUpdate();
                                 }
                                 System.out.println("DONE");
                                 break;
