@@ -471,11 +471,13 @@ public class A3 {
     			throw new DBException();
     		}
     	} catch (DBException e){
-    		e.printStackTrace();
-			System.out.println(e.message());
+    		//e.printStackTrace();
+			//System.out.println(e.message());
+    		System.out.println(ERROR);
 		} catch (Exception e){
-			e.printStackTrace();
-			System.out.println("Unexpect error : " + e.getMessage());
+			//e.printStackTrace();
+			//System.out.println("Unexpect error : " + e.getMessage());
+			System.out.println(ERROR);
 		}
     	
     }
@@ -498,7 +500,8 @@ public class A3 {
         	br.close(); 	
         	
         } catch (Exception e){
-        	e.printStackTrace();
+        	//e.printStackTrace();
+        	System.out.println(ERROR);
         } finally{
         	conn.close();
         }
