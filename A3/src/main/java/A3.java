@@ -326,9 +326,6 @@ public class A3 {
     	String[] cmdArr = cmd.split("\\s+");
     	try{
     		if (cmdArr[0].equals(GETV)){
-        		
-        	}
-        	else if (cmdArr[0].equals(GETV)){
         		int id = Integer.valueOf(cmdArr[1]);
         		int row = Integer.valueOf(cmdArr[2]);
         		int col = Integer.valueOf(cmdArr[3]);
