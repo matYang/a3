@@ -10,7 +10,7 @@ import java.sql.Statement;
 public class A3 {
     // The JDBC Connector Class.
 	
-    //private static final String dbClassName = "com.mysql.jdbc.Driver";
+    private static final String dbClassName = "com.mysql.jdbc.Driver";
     // Connection string. cs348 is the database the program is trying to connection
     // is connecting to,127.0.0.1 is the local loopback IP address for this machine, user name for the connection 
     // is root, password is cs348
@@ -147,11 +147,11 @@ public class A3 {
     	}
     	
     	public void exeDelete() throws SQLException{
-    		PreparedStatement p = this.conn.prepareStatement( "DELETE * FROM MATRIX where MATRIX_ID = ?" );
+    		PreparedStatement p = this.conn.prepareStatement( "DELETE FROM MATRIX where MATRIX_ID = ?" );
     		p.setInt(1, this.ID);
 			p.executeUpdate();
 			
-			p = this.conn.prepareStatement( "DELETE * FROM MATRIX_DATA where MATRIX_ID = ?" );
+			p = this.conn.prepareStatement( "DELETE FROM MATRIX_DATA where MATRIX_ID = ?" );
     		p.setInt(1, this.ID);
 			p.executeUpdate();
 			p.close();
@@ -359,15 +359,13 @@ public class A3 {
     		}
     		else if (cmdArr[0].equals(DELETE)){
     			if (cmdArr[1].equals("ALL")){
-    				String query = "DELETE * FROM MATRIX";
-    	            Statement stmt = conn.createStatement();
-    	            ResultSet rs = stmt.executeQuery(query);
-    	            
-    	            query = "DELETE * FROM MATRIX_DATA";
-    	            stmt = conn.createStatement();
-    	            rs = stmt.executeQuery(query);
+    				PreparedStatement p = conn.prepareStatement( "DELETE FROM MATRIX");
+    				p.executeUpdate();
+    				p.close();
     				
-
+    				p = conn.prepareStatement("DELETE FROM MATRIX_DATA");
+    				p.executeUpdate();
+    				p.close();
     			}
     			else{
     				int id = Integer.valueOf(cmdArr[1]);
@@ -488,6 +486,7 @@ public class A3 {
     	// Try to connect
         Connection conn = null;
         try{
+        	Class.forName(dbClassName).newInstance();
         	conn = DriverManager.getConnection(CONNECTION_STRING);
         	
         	BufferedReader br = new BufferedReader(new FileReader(inputFile));
