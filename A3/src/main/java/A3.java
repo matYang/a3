@@ -1,5 +1,3 @@
-package main.java;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.Connection;
@@ -361,13 +359,15 @@ public class A3 {
     		}
     		else if (cmdArr[0].equals(DELETE)){
     			if (cmdArr[1].equals("ALL")){
-    				PreparedStatement p = conn.prepareStatement( "DELETE * FROM MATRIX");
-    				p.executeUpdate();
-    				p.close();
+    				String query = "DELETE * FROM MATRIX";
+    	            Statement stmt = conn.createStatement();
+    	            ResultSet rs = stmt.executeQuery(query);
+    	            
+    	            query = "DELETE * FROM MATRIX_DATA";
+    	            stmt = conn.createStatement();
+    	            rs = stmt.executeQuery(query);
     				
-    				p = conn.prepareStatement("DELETE * FROM MATRIX_DATA");
-    				p.executeUpdate();
-    				p.close();
+
     			}
     			else{
     				int id = Integer.valueOf(cmdArr[1]);
