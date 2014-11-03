@@ -479,7 +479,7 @@ public class A3 {
     		//e.printStackTrace();
 			//System.out.println(e.message());
     		System.out.println(ERROR);
-		} catch (Exception e){
+		} catch (Throwable t){
 			//e.printStackTrace();
 			//System.out.println("Unexpect error : " + e.getMessage());
 			System.out.println(ERROR);
@@ -504,7 +504,7 @@ public class A3 {
         	}
         	br.close(); 	
         	
-        } catch (Exception e){
+        } catch (Throwable e){
         	//e.printStackTrace();
         	System.out.println(ERROR);
         } finally{
