@@ -147,7 +147,7 @@ public class A3 {
     	}
     	
     	public void exeDelete() throws SQLException{
-    		PreparedStatement p = this.conn.prepareStatement( "DELETE FROM MATRIX where MATRIX_ID = ?" );
+    		PreparedStatement p = this.conn.prepareStatement("DELETE FROM MATRIX where MATRIX_ID = ?");
     		p.setInt(1, this.ID);
 			p.executeUpdate();
 			
@@ -356,7 +356,7 @@ public class A3 {
     		}
     		else if (cmdArr[0].equals(DELETE)){
     			if (cmdArr[1].equals("ALL")){
-    				PreparedStatement p = conn.prepareStatement( "DELETE FROM MATRIX");
+    				PreparedStatement p = conn.prepareStatement("DELETE FROM MATRIX");
     				p.executeUpdate();
     				p.close();
     				
@@ -465,7 +465,12 @@ public class A3 {
 
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
-                System.out.println(rs.getString(1));
+                if (!rs.next()){
+                	throw new DBException();
+                }
+                else{
+                	System.out.println(rs.getString(1));
+                }
     		}
     		else{
     			throw new DBException();
