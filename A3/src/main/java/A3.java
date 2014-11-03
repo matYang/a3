@@ -79,7 +79,7 @@ public class A3 {
     	}
     	
     	public void exeFetchDimension() throws SQLException{
-    		String query = "SELECT * FROM MATRIX WHERE MARIX_ID = " + this.ID;
+    		String query = "SELECT * FROM MATRIX WHERE MATRIX_ID = " + this.ID;
             Statement stmt = this.conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             //if empty, throw exp
@@ -98,7 +98,7 @@ public class A3 {
 				throw new DBException();
 			}
     		
-    		String query = "SELECT * FROM MATRIX WHERE MARIX_ID = " + this.ID + " and ROW_NUM = " + row + " and COL_NUM = " + col;
+    		String query = "SELECT * FROM MATRIX WHERE MATRIX_ID = " + this.ID + " and ROW_NUM = " + row + " and COL_NUM = " + col;
     		Statement stmt = this.conn.createStatement();
     		ResultSet rs = stmt.executeQuery(query);
     		
@@ -119,7 +119,7 @@ public class A3 {
 				throw new DBException();
 			}
     		
-    		String query = "SELECT * FROM MATRIX WHERE MARIX_ID = " + this.ID + " and ROW_NUM = " + row + " and COL_NUM = " + col;
+    		String query = "SELECT * FROM MATRIX WHERE MATRIX_ID = " + this.ID + " and ROW_NUM = " + row + " and COL_NUM = " + col;
     		Statement stmt = this.conn.createStatement();
     		ResultSet rs = stmt.executeQuery(query);
     		
@@ -158,7 +158,7 @@ public class A3 {
     	}
     	
     	public void exeSetDimension(int row_dim, int col_dim) throws SQLException{
-    		String query = "SELECT * FROM MATRIX WHERE MARIX_ID = " + this.ID;
+    		String query = "SELECT * FROM MATRIX WHERE MATRIX_ID = " + this.ID;
             Statement stmt = this.conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             //if empty, throw exp
@@ -178,7 +178,7 @@ public class A3 {
             
             //contraction
             if (row_dim < this.ROW_DIM){
-            	query = "SELECT * FROM MATRIX_DATA WHERE MARIX_ID = " + this.ID + " AND ROW_NUM > " + row_dim + "AND ROW_NUM < " + (this.ROW_DIM + 1);
+            	query = "SELECT * FROM MATRIX_DATA WHERE MATRIX_ID = " + this.ID + " AND ROW_NUM > " + row_dim + "AND ROW_NUM < " + (this.ROW_DIM + 1);
             	stmt = this.conn.createStatement();
             	rs = stmt.executeQuery(query);
             	if (rs.next()){
@@ -186,7 +186,7 @@ public class A3 {
             	}
             }
             if (col_dim < this.COL_DIM){
-            	query = "SELECT * FROM MATRIX_DATA WHERE MARIX_ID = " + this.ID + " AND COL_NUM > " + col_dim + "AND COL_NUM < " + (this.COL_DIM + 1);
+            	query = "SELECT * FROM MATRIX_DATA WHERE MATRIX_ID = " + this.ID + " AND COL_NUM > " + col_dim + "AND COL_NUM < " + (this.COL_DIM + 1);
             	stmt = this.conn.createStatement();
             	rs = stmt.executeQuery(query);
             	if (rs.next()){
@@ -274,7 +274,7 @@ public class A3 {
     				this.data[i][j] = 0;
     			}
     		}
-    		String query = "SELECT * FROM MATRIX WHERE MARIX_ID = " + this.ID;
+    		String query = "SELECT * FROM MATRIX WHERE MATRIX_ID = " + this.ID;
     		Statement stmt = this.conn.createStatement();
     		ResultSet rs = stmt.executeQuery(query);
     		while (rs.next()){
@@ -475,6 +475,8 @@ public class A3 {
     		}
     	} catch (DBException e){
 			System.out.println(e.message());
+		} catch (Exception e){
+			System.out.println("Unexpect error : " + e.getMessage());
 		}
     	
     }
