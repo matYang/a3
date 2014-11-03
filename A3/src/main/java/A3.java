@@ -54,7 +54,7 @@ public class A3 {
     	public int ID;
     	public int ROW_DIM;
     	public int COL_DIM;
-    	public int[][] data;
+    	public double[][] data;
     	private Connection conn;
     	
     	public Matrix(int id, Connection conn){
@@ -69,7 +69,7 @@ public class A3 {
     		this.ID = id;
     		this.ROW_DIM = row_dim;
     		this.COL_DIM = col_dim;
-    		this.data = new int[row_dim][col_dim];
+    		this.data = new double[row_dim][col_dim];
     		this.conn = conn;
     		for (int i = 0; i < this.ROW_DIM; i++){
     			for (int j = 0; j < this.COL_DIM; j++){
@@ -90,7 +90,7 @@ public class A3 {
             this.COL_DIM = rs.getInt("COL_DIM");   
     	}
     	
-    	public int exeFetchValue(int row, int col) throws SQLException{
+    	public double exeFetchValue(int row, int col) throws SQLException{
     		this.exeFetchDimension();
     		
     		//out of range
@@ -104,14 +104,14 @@ public class A3 {
     		
     		//not exist, but in range, then it means it is 0
     		if (!rs.next()){
-    			return 0;
+    			return 0.0;
     		}
     		else{
-    			return rs.getInt("VALUE");
+    			return rs.getDouble("VALUE");
     		}
     	}
     	
-    	public void exeSetValue(int row, int col, int val) throws SQLException{
+    	public void exeSetValue(int row, int col, double val) throws SQLException{
     		this.exeFetchDimension();
     		
     		//out of range
@@ -129,14 +129,14 @@ public class A3 {
 				p.setInt(1, this.ID);
 				p.setInt(2, row);
 				p.setInt(3, col);
-				p.setInt(4, val);
+				p.setDouble(4, val);
 				p.executeUpdate();
 				p.close();
     		}
     		//exist, use update
     		else{
     			PreparedStatement p = this.conn.prepareStatement("UPDATE MATRIX_DATA set VALUE = ? where MATRIX_ID = ? and ROW_NUM = ? and COL_NUM = ?");
-    			p.setInt(1, val);
+    			p.setDouble(1, val);
     			p.setInt(2, this.ID);
     			p.setInt(3, row);
     			p.setInt(4, col);
@@ -268,10 +268,10 @@ public class A3 {
     	public void exeFetchData() throws SQLException{
     		this.exeFetchDimension();
     		
-    		this.data = new int[this.ROW_DIM][this.COL_DIM];
+    		this.data = new double[this.ROW_DIM][this.COL_DIM];
     		for (int i = 0; i < this.ROW_DIM; i++){
     			for (int j = 0; j < this.COL_DIM; j++){
-    				this.data[i][j] = 0;
+    				this.data[i][j] = 0.0;
     			}
     		}
     		String query = "SELECT * FROM MATRIX_DATA WHERE MATRIX_ID = " + this.ID;
@@ -280,7 +280,7 @@ public class A3 {
     		while (rs.next()){
     			int row = rs.getInt("ROW_NUM");
     			int col = rs.getInt("COL_NUM");
-    			int val = rs.getInt("VALUE");
+    			double val = rs.getDouble("VALUE");
     			if (row <= 0 || row > this.ROW_DIM || col <= 0 || col > this.COL_DIM){
     				throw new DBException();
     			}
@@ -303,7 +303,7 @@ public class A3 {
 						p.setInt(1, this.ID);
 						p.setInt(2, i+1);
 						p.setInt(3, j+1);
-						p.setInt(4, data[i][j]);
+						p.setDouble(4, data[i][j]);
 						p.executeUpdate();
 						p.close();
 					}
@@ -331,14 +331,14 @@ public class A3 {
         		int col = Integer.valueOf(cmdArr[3]);
 
         		Matrix m = new Matrix(id, conn);
-        		int val = m.exeFetchValue(row, col);
+        		double val = m.exeFetchValue(row, col);
         		System.out.println(val);
         	}
     		else if (cmdArr[0].equals(SETV)){
     			int id = Integer.valueOf(cmdArr[1]);
         		int row = Integer.valueOf(cmdArr[2]);
         		int col = Integer.valueOf(cmdArr[3]);
-        		int val = Integer.valueOf(cmdArr[4]);
+        		double val = Double.valueOf(cmdArr[4]);
         		
         		Matrix m = new Matrix(id, conn);
         		m.exeSetValue(row, col, val);
