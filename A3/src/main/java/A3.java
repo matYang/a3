@@ -274,7 +274,7 @@ public class A3 {
     				this.data[i][j] = 0;
     			}
     		}
-    		String query = "SELECT * FROM MATRIX WHERE MATRIX_ID = " + this.ID;
+    		String query = "SELECT * FROM MATRIX_DATA WHERE MATRIX_ID = " + this.ID;
     		Statement stmt = this.conn.createStatement();
     		ResultSet rs = stmt.executeQuery(query);
     		while (rs.next()){
