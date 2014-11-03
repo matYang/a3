@@ -471,8 +471,10 @@ public class A3 {
     			throw new DBException();
     		}
     	} catch (DBException e){
+    		e.printStackTrace();
 			System.out.println(e.message());
 		} catch (Exception e){
+			e.printStackTrace();
 			System.out.println("Unexpect error : " + e.getMessage());
 		}
     	
