@@ -163,7 +163,7 @@ public class A3 {
             ResultSet rs = stmt.executeQuery(query);
             //if empty, throw exp
             if (!rs.next()){
-            	PreparedStatement p = this.conn.prepareStatement("INSERT INTO MAXTRIX VALUES(?,?,?)");
+            	PreparedStatement p = this.conn.prepareStatement("INSERT INTO MATRIX VALUES(?,?,?)");
 				p.setInt(1, this.ID);
 				p.setInt(2, row_dim);
 				p.setInt(3, col_dim);
@@ -193,7 +193,7 @@ public class A3 {
             		throw new DBException();
             	}
             }
-            PreparedStatement p = this.conn.prepareStatement("UPDATE MAXTRIX set ROW_DIM = ?, COL_DIM = ? where MATRIX_ID = ?");
+            PreparedStatement p = this.conn.prepareStatement("UPDATE MATRIX set ROW_DIM = ?, COL_DIM = ? where MATRIX_ID = ?");
             p.setInt(1, row_dim);
 			p.setInt(2, col_dim);
 			p.setInt(3, this.ID);
@@ -289,7 +289,7 @@ public class A3 {
     	}
     	
     	public void exeCreateData() throws SQLException{
-    		PreparedStatement p = this.conn.prepareStatement("INSERT INTO MAXTRIX VALUES(?,?,?)");
+    		PreparedStatement p = this.conn.prepareStatement("INSERT INTO MATRIX VALUES(?,?,?)");
 			p.setInt(1, this.ID);
 			p.setInt(2, this.ROW_DIM);
 			p.setInt(3, this.COL_DIM);
