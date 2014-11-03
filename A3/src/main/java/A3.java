@@ -125,7 +125,7 @@ public class A3 {
     		
     		//not exist, but in range, then use insert
     		if (!rs.next()){
-    			PreparedStatement p = this.conn.prepareStatement("INSERT INTO MAXTRIX_DATA VALUES(?,?,?,?)");
+    			PreparedStatement p = this.conn.prepareStatement("INSERT INTO MATRIX_DATA VALUES(?,?,?,?)");
 				p.setInt(1, this.ID);
 				p.setInt(2, row);
 				p.setInt(3, col);
@@ -135,7 +135,7 @@ public class A3 {
     		}
     		//exist, use update
     		else{
-    			PreparedStatement p = this.conn.prepareStatement("UPDATE MAXTRIX_DATA set VALUE = ? where MATRIX_ID = ? and ROW_NUM = ? and COL_NUM = ?");
+    			PreparedStatement p = this.conn.prepareStatement("UPDATE MATRIX_DATA set VALUE = ? where MATRIX_ID = ? and ROW_NUM = ? and COL_NUM = ?");
     			p.setInt(1, val);
     			p.setInt(2, this.ID);
     			p.setInt(3, row);
@@ -299,7 +299,7 @@ public class A3 {
 			for (int i = 0; i < this.ROW_DIM; i++){
 				for (int j = 0; j < this.COL_DIM; j++) {
 					if (data[i][j] != 0){
-						p = this.conn.prepareStatement("INSERT INTO MAXTRIX_DATA VALUES(?,?,?,?)");
+						p = this.conn.prepareStatement("INSERT INTO MATRIX_DATA VALUES(?,?,?,?)");
 						p.setInt(1, this.ID);
 						p.setInt(2, i+1);
 						p.setInt(3, j+1);
